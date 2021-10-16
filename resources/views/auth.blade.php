@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Signin Template · Bootstrap v5.1</title>
 
-    <link rel="canonical" href="{{ asset('assets/css/signin.css') }}/">
+    <link rel="canonical" href="{{ asset('assets/css/signin.css') }}">
 
     
 
     <!-- Bootstrap core CSS -->
-<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">

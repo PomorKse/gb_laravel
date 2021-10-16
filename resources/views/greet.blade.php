@@ -10,7 +10,7 @@
     
 
     <!-- Bootstrap core CSS -->
-<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -58,7 +58,7 @@
     <h1>Новостной агрегатор</h1>
     <p class="lead">Здесь Вы получите ленту новостей на основании Ваших предпочтений</p>
     <p class="lead">
-      <a href="{{ route('news.index') }}" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Смотреть все новости</a>
+      <a href="{{ route('news.index') }}" class="btn btn-lg btn-secondary fw-bold border-blue bg-blue">Смотреть все новости</a>
     </p>
   </main>
 

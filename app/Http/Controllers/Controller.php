@@ -16,6 +16,7 @@ class Controller extends BaseController
     protected array $news = [
         [
             'id' => 0,
+            //'category_id' => 0,
             'title' => 'News #1',
             'author' => '',
             'image' => null,
@@ -28,14 +29,13 @@ class Controller extends BaseController
     {
         $faker = FakerFactory::create();
         $data = [];
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < 9; $i++) { 
             $data[] = [
                 'id' => $i,
                 'title' => $faker->realText(50),
                 'author' => $faker->userName(),
                 'image' => null,
                 'description' => $faker->sentence(10),
-
             ];
         }
         return $data;

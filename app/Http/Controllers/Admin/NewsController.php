@@ -14,7 +14,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return "Новости из админки";
+        return view('admin.news.index', [
+            'newsList' => $this->getNews()
+        ]);
     }
 
     /**
@@ -81,6 +83,6 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return "Сейчас я тебя убивать буду";
     }
 }

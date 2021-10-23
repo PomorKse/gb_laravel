@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class FeedbackController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +13,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return view('admin.news.index', [
-            'newsList' => $this->getNews()
-        ]);
+        return view('feedback');
     }
 
     /**
@@ -26,7 +23,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('admin.news.create');
+        //
     }
 
     /**
@@ -37,9 +34,14 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => ['required', 'string']
-        ]);
+        $data = [
+            'login'   => $request->input('login'),
+            'comment' => $request->input('comment')
+        ];
+
+        file_put_contents('testdata.txt', implode(': ', $data));
+        echo "Ваш отзыв очень важен для нас";
+        route('greet.index');//Разобраться с редиректом
     }
 
     /**

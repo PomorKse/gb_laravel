@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title') Аутентификация - @parent @stop
+@section('title') Добро пожаловать - @parent @stop
 
 @section('content')<!doctype html>
 <main class="px-3">

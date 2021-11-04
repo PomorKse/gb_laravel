@@ -30,9 +30,9 @@
 
           @forelse ($newsList as $news)
             <tr>
-              <td>{{ $news['id'] + 1 }}</td>
-              <td>{{ $news['title'] }}</td>
-              <td>{{ $news['author'] }}</td>
+              <td>{{ $news->id }}</td>
+              <td>{{ $news->title }}</td>
+              <td>{{ $news->author }}</td>
               <td>{{ now()->format('d-m-Y H:i') }}</td>
               <td>
                 <a href="#{{--{{ route('admin.news.edit', ['id' => intval($news['id'])]) }}--}}">Ред.</a>

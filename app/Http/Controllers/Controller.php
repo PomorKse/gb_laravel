@@ -13,7 +13,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected array $news = [
+    /*protected array $news = [
         [
             'id' => 0,
             //'category_id' => 0,
@@ -39,5 +39,5 @@ class Controller extends BaseController
             ];
         }
         return $data;
-    }
+    }*/
 }

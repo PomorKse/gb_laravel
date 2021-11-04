@@ -20,13 +20,27 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Заголовок</th>
-              <th scope="col">Автор</th>
+              <th scope="col">Название категории</th>
+              <th scope="col">Описание</th>
               <th scope="col">Дата публикации</th>
               <th scope="col">Действия</th>
             </tr>
           </thead>
           <tbody>
+          @forelse ($categoryList as $category)
+            <tr>
+              <td>{{ $category->id }}</td>
+              <td>{{ $category->title }}</td>
+              <td>{{ $category->description }}</td>
+              <td>{{ now()->format('d-m-Y H:i') }}</td>
+              <td>
+                <a href="#{{--{{ route('admin.news.edit', ['id' => intval($news['id'])]) }}--}}">Ред.</a>
+                &nbsp;|&nbsp;
+                <a href="#{{--{{ route('admin.news.destroy', ['id' => intval($news['id'])]) }}--}}" style="color:red">Уд.</a></td>
+            </tr>
+          @empty
+            "Категорий нет"
+          @endforelse
 
           </tbody>
         </table>

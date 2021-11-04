@@ -15,7 +15,7 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return response('Response', 404);
-        //return view('admin.index');
+        //return response('Response', 404);
+        return view('admin.index');
     }
 }

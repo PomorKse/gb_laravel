@@ -20,7 +20,7 @@ class CreateNewsTable extends Migration
                 ->onDelete('cascade');
             $table->string('title', 255);
             $table->string('author', 191)->default('Admin');
-            $table->enum('status', ['PUBLISHED', 'DRAFTED', 'BLOCKED'])
+            $table->enum('status', ['PUBLISHED', 'DRAFT', 'BLOCKED'])
                 ->default('PUBLISHED');
             $table->string('image', 191)->nullable();
             $table->string('description')->nullable();

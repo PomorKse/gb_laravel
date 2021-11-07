@@ -11,13 +11,16 @@
 
       <div class="card-body">
         <p class="card-text">{{ $news->title }}</p>
-        <p class="card-text">{{ $news->description }}</p>
+        <p class="card-text">{!! $news->description !!}</p>
 
         <div class="d-flex justify-content-between align-items-center">
           <div class="btn-group">
-            <a href="{{ route('news.show', ['id' => intval($news->id)]) }}" class="btn btn-sm btn-outline-secondary">Читать далее</a>
+            <a href="{{ route('news.show', ['news' => $news]) }}" class="btn btn-sm btn-outline-secondary">Читать далее</a>
           </div>
-          <small class="text-muted">Автор: {{ $news->author }}<br>{{ now()->format('d-m-Y H:i') }}</small>
+          <small class="text-muted">
+            Автор: {{ $news->author }}<br>
+            @if ($news->updated_at) {{ $news->updated_at->format('d-m-Y H:i') }} @else - @endif
+          </small>
         </div>
       </div>
     </div>
@@ -26,5 +29,9 @@
 @empty
   <h2>Новостей нет</h2>
 @endforelse
+
+<div>
+  {{ $newsList->links()}}
+</div>
 
 @endsection

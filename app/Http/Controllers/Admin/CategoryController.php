@@ -15,11 +15,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = new Category();
-        /*dd($categories);*/
-
+        $categories = Category::with('news')->paginate(5);
+        
         return view('admin.categories.index',[
-            'categoryList' => $categories->getCategory()
+            'categories' => $categories
         ]);
     }
 
@@ -30,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -41,7 +40,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validation here
+
+        $category = Category::create(
+            $request->only(['title', 'description'])
+        );
+
+        if($category) {
+            return redirect()->route('admin.categories.index')
+                ->with('success', 'Категория успешно дабавлена');
+        }
+
+        return back()->with('error', 'Категорию добавить не удалось');
     }
 
     /**
@@ -61,9 +71,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', [
+            'category' => $category
+        ]);        
     }
 
     /**
@@ -73,9 +85,17 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $category->title = $request->input('title');
+        $category->description = $request->input('description');
+
+        if($category->save()){
+            return redirect()->route('admin.categories.index')
+            ->with('success', 'Категория успешно обновлена');
+        }
+
+        return back()->with('error', 'Категорию обновить не удалось');
     }
 
     /**
@@ -84,7 +104,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
         //
     }

@@ -7,29 +7,19 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function index()//вывод всех новостей
+    public function index(News $news)//вывод всех новостей
     {
-        $news = new News();
-
         return view('news.index', [
-            'newsList' => $news->getNews()
+            'newsList' => $news->paginate(9)
         ]);
 
     }
 
-    public function show(int $id)//вывод конкретной новости
+    public function show(News $news)//вывод конкретной новости
     {
-        $news = new News();
-
-        $news = $news->getNewsById($id) ?? null;
-        if (!$news) {
-            abort(404);
-        }
-
         return view('news.show', [
             'news' => $news,
-            'id'   => $id
-        ]);
+            ]);
     }
 
 }

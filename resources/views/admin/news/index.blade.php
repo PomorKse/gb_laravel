@@ -30,18 +30,33 @@
 
           @forelse ($newsList as $news)
             <tr>
-              <td>{{ $news->id }}</td>
-              <td>{{ $news->title }}</td>
-              <td>{{ $news->author }}</td>
-              <td>{{ now()->format('d-m-Y H:i') }}</td>
               <td>
-                <a href="#{{--{{ route('admin.news.edit', ['id' => intval($news['id'])]) }}--}}">Ред.</a>
+                {{ $news->id }}
+              </td>
+              <td>
+                {{ $news->title }}
+              </td>
+              <td>
+                {{ $news->author }}
+              </td>
+              <td>
+                @if ($news->updated_at) {{ $news->updated_at->format('d-m-Y H:i') }}
+                @else - @endif
+              </td>
+              <td>
+                <a href="{{ route('admin.news.edit', ['news' => $news]) }}">Ред.</a>
                 &nbsp;|&nbsp;
-                <a href="#{{--{{ route('admin.news.destroy', ['id' => intval($news['id'])]) }}--}}" style="color:red">Уд.</a></td>
+                <a href="{{ route('admin.news.destroy', ['news' => $news]) }}" style="color:red">Уд.</a>
+              </td>
             </tr>
           @empty
             "Новостей нет"
           @endforelse
+
+            <div>
+              {{ $newsList->links()}}
+            </div>
+          
           </tbody>
         </table>
   </div>

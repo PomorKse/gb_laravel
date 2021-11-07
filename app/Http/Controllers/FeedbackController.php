@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
@@ -11,9 +12,11 @@ class FeedbackController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Feedback $feedbacks)
     {
-        return view('feedback');
+        return view('feedback', [
+            'feedbacks' => $feedbacks->orderByDesc('updated_at')->paginate(5)
+        ]);
     }
 
     /**
@@ -34,14 +37,19 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        $data = [
-            'login'   => $request->input('login'),
-            'comment' => $request->input('comment')
-        ];
+        /*$data = $request->input('login') . ": " . $request->input('feedback') . PHP_EOL;
+        
+        file_put_contents('testdata.txt', $data, LOCK_EX|FILE_APPEND);*/
+        $feedback = Feedback::create(
+            $request->only(['login', 'feedback'])
+        );
 
-        file_put_contents('testdata.txt', implode(': ', $data));
-        echo "Ваш отзыв очень важен для нас";
-        route('greet.index');//Разобраться с редиректом
+        if($feedback){
+            return redirect()->route('feedback.index')
+            ->with('success', 'Отзыв добавлен');
+        }
+
+        return back()->with('error', 'Отзыв добавить не удалось');       
     }
 
     /**

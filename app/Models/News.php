@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class News extends Model
 {
@@ -11,16 +12,12 @@ class News extends Model
 
     protected $table = 'news';
 
-    public function getNews()
+    protected $fillable = [
+        'category_id', 'title', 'author', 'status', 'description'
+    ];
+
+    public function category() : BelongsTo
     {
-        //select указывается только, если не все данные, иначе можно опустить
-        return \DB::table($this->table)->select(['id', 'title', 'author', 'description'])->get();
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
-
-    public function getNewsById($id)
-    {
-        return \DB::table($this->table)->find($id);        
-    }
-
-
 }

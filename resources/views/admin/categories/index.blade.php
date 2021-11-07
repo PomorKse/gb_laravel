@@ -22,25 +22,40 @@
               <th scope="col">#</th>
               <th scope="col">Название категории</th>
               <th scope="col">Описание</th>
-              <th scope="col">Дата публикации</th>
+              <th scope="col">Дата последнего обновления</th>
               <th scope="col">Действия</th>
             </tr>
           </thead>
           <tbody>
-          @forelse ($categoryList as $category)
+          @forelse ($categories as $category)
             <tr>
-              <td>{{ $category->id }}</td>
-              <td>{{ $category->title }}</td>
-              <td>{{ $category->description }}</td>
-              <td>{{ now()->format('d-m-Y H:i') }}</td>
               <td>
-                <a href="#{{--{{ route('admin.news.edit', ['id' => intval($news['id'])]) }}--}}">Ред.</a>
+                {{ $category->id }}
+              </td>
+              <td>
+                {{ $category->title }} ({{$category->news->count()}})
+              </td>
+              <td>
+                {{ $category->description }}
+              </td>
+              <td>
+                @if ($category->updated_at) {{ $category->updated_at->format('d-m-Y H:i') }}
+                @else - @endif
+              </td>
+              <td>
+                <a href="{{ route('admin.categories.edit', ['category' => $category->id]) }}">Ред.</a>
                 &nbsp;|&nbsp;
-                <a href="#{{--{{ route('admin.news.destroy', ['id' => intval($news['id'])]) }}--}}" style="color:red">Уд.</a></td>
+                <a href="{{ route('admin.categories.destroy', ['category' => $category->id]) }}" style="color:red">Уд.</a>
+              </td>
             </tr>
           @empty
             "Категорий нет"
           @endforelse
+
+          <div>
+            {{ $categories->links()}}
+          </div>
+
 
           </tbody>
         </table>

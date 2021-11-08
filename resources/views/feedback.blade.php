@@ -16,10 +16,12 @@
           <label for="login">Имя пользователя</label>
           <input type="text" class="form-control" name="login" id="login" value="{{ old('login') }}">
         </div>
+        @error('login') <div style="color: #842029"> {{$message}} </div> @enderror
         <div class="form-group">
           <label for="feedback">комментарий/отзыв</label>
           <textarea class="form-control" name="feedback" id="feedback">{!! old('feedback') !!}</textarea>
-        </div><br>
+        </div>
+        @error('feedback') <div style="color: #842029"> {{$message}} </div> @enderror<br>
         <button type="submit" class="btn btn-success">Добавить отзыв</button>
       </form>
     </div>
@@ -44,12 +46,6 @@
     <div>
       {{ $feedbacks->links()}}
     </div>
-
-
-
-    <small class="d-block text-end mt-3">
-      <a href="#">All updates</a>
-    </small>
   </div>
   
   </main>

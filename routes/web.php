@@ -43,7 +43,3 @@ Route::get('/auth', [AuthController::class, 'index'])
 Route::get('/greet', [GreetController::class, 'index'])
     ->name('greet.index');
 Route::resource('/feedback', FeedbackController::class);
-
-
-
-

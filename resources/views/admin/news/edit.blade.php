@@ -27,13 +27,15 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="title">Наименование</label>
+        <label for="title">Заголовок</label>
         <input type="text" class="form-control" name="title" id="title" value="{{ $news->title }}">
       </div>
+      @error('title') <div style="color: #842029"> {{$message}} </div> @enderror
       <div class="form-group">
         <label for="author">Автор</label>
         <input type="text" class="form-control" name="author" id="author" value="{{ $news->author }}">
       </div>
+      @error('author') <div style="color: #842029"> {{$message}} </div> @enderror
       <div class="form-group">
         <label for="status">Статус</label>
         <select class="form-control" name="status" id="status">
@@ -43,9 +45,10 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="description">Описание</label>
+        <label for="description">Текст новости</label>
         <textarea class="form-control" name="description" id="description">{!! $news->description !!}</textarea>
-      </div><br>
+      </div>
+      @error('description') <div style="color: #842029"> {{$message}} </div> @enderror <br>
       <button type="submit" class="btn btn-success">Редактировать</button>
 
 

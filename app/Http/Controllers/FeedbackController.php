@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateFeedbackRequest;
 use App\Models\Feedback;
-use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
 {
@@ -35,21 +35,16 @@ class FeedbackController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateFeedbackRequest $request)
     {
-        /*$data = $request->input('login') . ": " . $request->input('feedback') . PHP_EOL;
-        
-        file_put_contents('testdata.txt', $data, LOCK_EX|FILE_APPEND);*/
-        $feedback = Feedback::create(
-            $request->only(['login', 'feedback'])
-        );
+        $feedback = Feedback::create($request->validated());
 
         if($feedback){
             return redirect()->route('feedback.index')
-            ->with('success', 'Отзыв добавлен');
+            ->with('success', __('messages.feedback.store.success'));
         }
 
-        return back()->with('error', 'Отзыв добавить не удалось');       
+        return back()->with('error', __('messages.feedback.store.fail'));       
     }
 
     /**

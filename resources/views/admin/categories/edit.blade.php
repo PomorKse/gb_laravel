@@ -17,13 +17,15 @@
       @csrf
       @method('put')
       <div class="form-group">
-        <label for="title">Наименование</label>
+        <label for="title">Название категории</label>
         <input type="text" class="form-control" name="title" id="title" value="{{ $category->title }}">
       </div>
+      @error('title') <div style="color: #842029"> {{$message}} </div> @enderror
       <div class="form-group">
         <label for="description">Описание</label>
         <textarea class="form-control" name="description" id="description">{!! $category->description !!}</textarea>
-      </div><br>
+      </div>
+      @error('description') <div style="color: #842029"> {{$message}} </div> @enderror <br>
       <button type="submit" class="btn btn-success">Редактировать</button>
 
 

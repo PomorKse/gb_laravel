@@ -16,7 +16,7 @@
     <form method="post" action="{{ route('admin.news.store') }}">
       @csrf
       <div class="form-group">
-        <label for="category_id">Статус</label>
+        <label for="category_id">Категория</label>
         <select class="form-control" name="category_id" id="category_id">
           <option value="1">Без категории</option>
           @foreach ($categories as $category)
@@ -25,13 +25,15 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="title">Наименование</label>
+        <label for="title">Заголовок</label>
         <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
       </div>
+      @error('title') <div style="color: #842029"> {{$message}} </div> @enderror
       <div class="form-group">
         <label for="author">Автор</label>
         <input type="text" class="form-control" name="author" id="author" value="{{ old('author') }}">
       </div>
+      @error('author') <div style="color: #842029"> {{$message}} </div> @enderror
       <div class="form-group">
         <label for="status">Статус</label>
         <select class="form-control" name="status" id="status">
@@ -41,9 +43,10 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="description">Описание</label>
+        <label for="description">Текст новости</label>
         <textarea class="form-control" name="description" id="description">{!! old('description') !!}</textarea>
-      </div><br>
+      </div>
+      @error('description') <div style="color: #842029"> {{$message}} </div> @enderror<br>
       <button type="submit" class="btn btn-success">Добавить</button>
 
 

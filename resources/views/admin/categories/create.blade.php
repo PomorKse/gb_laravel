@@ -16,13 +16,15 @@
     <form method="post" action="{{ route('admin.categories.store') }}">
       @csrf
       <div class="form-group">
-        <label for="title">Наименование</label>
+        <label for="title">Название категории</label>
         <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
       </div>
+      @error('title') <div style="color: #842029"> {{$message}} </div> @enderror
       <div class="form-group">
         <label for="description">Описание</label>
         <textarea class="form-control" name="description" id="description">{!! old('description') !!}</textarea>
-      </div><br>
+      </div>
+      @error('description') <div style="color: #842029"> {{$message}} </div> @enderror <br>
       <button type="submit" class="btn btn-success">Добавить</button>
 
 

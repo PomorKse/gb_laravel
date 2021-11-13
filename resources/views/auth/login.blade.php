@@ -63,6 +63,11 @@
                                     </a>
                                 @endif
                             </div>
+
+                            <a class="btn btn-link" href="{{ route('github.link') }}">
+                                Войти через Github
+                            </a>
+
                         </div>
                     </form>
                 </div>

@@ -6,10 +6,12 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\IndexController as AdminController;
+use App\Http\Controllers\Admin\ParserController as ParserController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GreetController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\SocialController;
 
 
 /*
@@ -33,6 +35,8 @@ Route::group(['middleware' => 'auth'], function()
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function()
     {
+        Route::get('/parser', ParserController::class)
+            ->name('parser');
         Route::get('/', AdminController::class)
             ->name('index');
         Route::resource('/news', AdminNewsController::class);
@@ -40,6 +44,15 @@ Route::group(['middleware' => 'auth'], function()
         Route::resource('/users', AdminUserController::class);
     });
 });
+
+Route::group(['middleware' => 'guest'], function()
+{
+    Route::get('/github/link', [SocialController::class, 'link'])
+		->name('github.link');
+	Route::get('/github/callback', [SocialController::class, 'callback'])
+		->name('github.callback');
+});
+
 
 Route::get('/news', [NewsController::class, 'index'])
     ->name('news.index');

@@ -39,7 +39,8 @@
                 @if ($user->is_admin) + @else - @endif
               </td>
               <td>
-                {{ $user->created_at }}
+                @if ($user->last_login_at) {{ $user->last_login_at->format('d-m-Y H:i') }}
+                @else неизвестно @endif
               </td>
               <td>
                 <a href="{{ route('admin.users.edit', ['user' => $user]) }}">Ред.</a>

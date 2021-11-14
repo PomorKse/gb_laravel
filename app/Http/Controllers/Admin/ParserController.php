@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Contracts\Parser;
 use Illuminate\Http\Request;
-use Orchestra\Parser\Xml\Facade as XmlParser;
+
 
 class ParserController extends Controller
 {
@@ -14,28 +15,11 @@ class ParserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, Parser $parser)
     {
-        $url = "https://yandex.music.rss";
-        $xml = XmlParser::load($url);//не видит метод load???
+        $news = $parser->setUrl('https://news.yandex.ru/music.rss')
+			->start();
 
-        $data = $xml->parse([
-            'title' => [
-                'uses' => 'channel.title'
-            ],
-            'link' => [
-                'uses' => 'channel.link'
-            ],
-            'description' => [
-                'uses' => 'channel.description'
-            ],
-            'image.url' => [
-                'uses' => 'channel.image.url'
-            ],
-            'news' => [
-                'uses' => 'channel.item[title,link,guid,description,pubDate]'
-            ]
-        ]);
-        dd($data);
+		dd($news);
     }
 }

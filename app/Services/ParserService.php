@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\Parser;
+use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ParserService implements Parser
 {

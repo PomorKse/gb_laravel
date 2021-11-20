@@ -27,9 +27,16 @@
       </div>
       @error('description') <div style="color: #842029"> {{$message}} </div> @enderror <br>
       <button type="submit" class="btn btn-success">Редактировать</button>
-
-
     </form>
-
   </div>
 @endsection
+
+@push('js')
+  <script>   
+    ClassicEditor
+        .create( document.querySelector( '#description' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+  </script>
+@endpush

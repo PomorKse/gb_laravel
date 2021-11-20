@@ -13,11 +13,17 @@ class News extends Model
     protected $table = 'news';
 
     protected $fillable = [
-        'category_id', 'title', 'author', 'status', 'description'
+        'source_id', 'category_id', 'title', 'author', 'status', 'description', 'image'
     ];
 
     public function category() : BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+
+    public function source() : BelongsTo
+    {
+        return $this->belongsTo(Source::class, 'source_id', 'id');
+    }
+
 }

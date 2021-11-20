@@ -10,7 +10,7 @@ class NewsController extends Controller
     public function index(News $news)//вывод всех новостей
     {
         return view('news.index', [
-            'newsList' => $news->paginate(9)
+            'newsList' => $news->orderByDesc('updated_at')->paginate(9)
         ]);
 
     }

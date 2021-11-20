@@ -8,6 +8,7 @@ use App\Services\ParserService;
 use App\Services\SocialService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use ImageService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(Parser::class, ParserService::class);
 		$this->app->bind(Social::class, SocialService::class);
+		$this->app->bind(ImageService::class);
     }
 
     /**

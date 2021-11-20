@@ -24,6 +24,7 @@ class NewsSeeder extends Seeder
         $data = [];
         for ($i=0; $i < 10; $i++) { 
             $data[] = [
+                'source_id' => 3,
                 'category_id' => 1,
                 'title'       => $faker->sentence(mt_rand(3, 10)),
                 'author'      => $faker->firstName() . "-" . $faker->lastName(),

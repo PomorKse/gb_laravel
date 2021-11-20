@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Contracts\Parser;
+use App\Models\News;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ParserService implements Parser
@@ -20,11 +23,11 @@ class ParserService implements Parser
 	   return $this->url;
    }
 
-   public function start(): array
+	 public function start(): void
    {
 	   $xml = XmlParser::load($this->getUrl());
 
-	   return $xml->parse([
+	   $data = $xml->parse([
 		   'title' => [
 			   'uses' => 'channel.title'
 		   ],
@@ -37,9 +40,22 @@ class ParserService implements Parser
 		   'image' => [
 			   'uses' => 'channel.image.url'
 		   ],
-		   'news' => [
-			   'uses' => 'channel.item[title,link,guid,description,pubDate]'
-		   ]
+			 'news_title' => [
+				'uses' => 'channel.item[title]'
+				],
+				'news_description' => [
+					'uses' => 'channel.item[description]'
+				],
 	   ]);
+
+		 for ($i=0; $i < count($data); $i++) { 
+			 $news = News::create([
+				'source_id' => 3,
+				'category_id' => 1,
+				'title' => Arr::get($data, 'news_title.' . $i . '.title'),
+				'description' => mb_strimwidth(Arr::get($data, 'news_description.' . $i . '.description'),0,255),
+				]);
+		 }
+
    }
 }

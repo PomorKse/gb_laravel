@@ -14,6 +14,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link @if (request()->routeIs('admin.sources.*')) active @endif" href="{{ route('admin.sources.index') }}">
+              <span data-feather="shopping-cart"></span>
+              Ресурсы
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link @if (request()->routeIs('admin.categories.*')) active @endif" href="{{ route('admin.categories.index') }}">
               <span data-feather="shopping-cart"></span>
               Категории
